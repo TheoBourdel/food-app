@@ -1,0 +1,14 @@
+[
+    {
+        "title" : "Star Wars",
+        "Durée" : "3h",
+        "Date" : "6 Mars",
+        "Ratio" : "4.5/5"
+    },
+    {
+        "title" : "Top Gun",
+        "Durée" : "2h",
+        "Date" : "17 Mai",
+        "Ratio" : "4.3/5"
+    }
+]
