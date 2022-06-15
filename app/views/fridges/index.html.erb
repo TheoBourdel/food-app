@@ -1,0 +1,13 @@
+
+
+
+<table>
+  <% @fridge.each do |item| %>
+    <tr>
+      <td><%= link_to item.content, fridge_path(item) %></td>
+      <td><%= button_to 'Edit', edit_fridge_path(item), method: 'get'%></td>
+      <td><%= button_to 'Remove', fridge_path(item), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+</table>
+
+<%= link_to "Add a New Item", new_fridge_path %>

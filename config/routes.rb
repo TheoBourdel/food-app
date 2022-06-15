@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  # controller/action
+  resources :fridges
+
+
+  
+
+  #controller/action
   root to: "food#index"
   
 end

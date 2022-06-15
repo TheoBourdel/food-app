@@ -6,6 +6,9 @@ class FoodController < ApplicationController
 
         @data = JSON.parse(File.read('recipes.json'))
         
+        
     end
+
+    
 
 end

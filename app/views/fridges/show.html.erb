@@ -1,0 +1,5 @@
+<h1>Fridge#show</h1>
+
+<h1><%= @fridge.content %></h1>
+<%= link_to 'Remove', @fridge, method: :delete, data: { confirm: 'Are you sure?' } %>
+

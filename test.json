@@ -12,3 +12,14 @@
         "Ratio" : "4.3/5"
     }
 ]
+
+
+// <div>
+//     <ul>
+//     <% @lol.each do |item|%>
+//         <li>
+//         Rate: <%= item['rate'] %>
+//         </li>
+//    <% end %>
+//    </ul>
+// </div>

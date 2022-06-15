@@ -1,0 +1,8 @@
+<h1>Fridge#edit</h1>
+
+
+<h3>Update Fridge Details</h3>
+<%= form_with model: @fridge do |form| %>
+  <%= form.text_field :content, placeholder: "content" %>
+  <%= form.submit %>
+<% end %>
