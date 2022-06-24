@@ -2,9 +2,37 @@ class FridgesController < ApplicationController
 
     
     def index
+
         @fridge = Fridge.all
+
+
         #RECIPES :
-        @data = JSON.parse(File.read('recipes.json'))
+        @recipes = JSON.parse(File.read('recipes.json'))
+        
+
+        # AJOUTE LES INGREDIENTS DANS UN TABLEAU
+        @foods = []
+
+        @fridge.each do |f|
+            @foods.push(f.content)
+        end
+
+
+        @count = 0
+
+
+        # AJOUTE LES RECETTES EN FONCTION DES INGREDIENTS DANS LE FRIGO
+        @ingredientsOfRecipes = []
+
+        @fridge.each do |f|
+            @recipes.each do |item|
+                item['ingredients'].each do |i|
+                    if i.include? f.content
+                        @ingredientsOfRecipes.push(item)
+                    end
+                end
+            end
+        end
 
     end
 
@@ -18,6 +46,7 @@ class FridgesController < ApplicationController
     
     def new
         @fridge = Fridge.new
+        
     end
     
     def create
@@ -34,8 +63,8 @@ class FridgesController < ApplicationController
         @fridge = Fridge.find(params[:id])
     
         @fridge.update(fridge_params)
-    
-        redirect_to fridge_path(@fridge)
+        
+        redirect_to action: "index"
     end
     
     def destroy

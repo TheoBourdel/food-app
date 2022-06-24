@@ -14,12 +14,266 @@
 ]
 
 
-// <div>
-//     <ul>
-//     <% @lol.each do |item|%>
-//         <li>
-//         Rate: <%= item['rate'] %>
-//         </li>
-//    <% end %>
-//    </ul>
-// </div>
+<div>
+    <ul>
+      <% @fridge.each do |f| %>
+        <% @data.each do |item| %>
+          <li>
+            <ul>
+              <% item['ingredients'].each do |i| %>
+                <li>
+                  <% if i.include? f.content %>
+                  <%= i %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+          <br />
+        <% end %>
+      <% end %>
+    </ul>
+</div>
+
+
+<% @test.each do |t| %>
+  <ul>
+    <li>
+      <%= t["ingredients"] %>
+    </li>
+  </ul>
+<% end %>
+
+
+
+
+
+
+
+
+// controller
+@fridge.each do |f|
+            @recipes.each do |item|
+                item['ingredients'].each do |i|
+                    if i.include? f.content
+                        @ingredientsOfRecipes.push(item)
+                    end
+                end
+            end
+        end
+
+
+// view
+        <% @ingredientsOfRecipes.each do |item| %>
+    <ul>
+      <%= item["name"] %>
+      <% item['ingredients'].each do |ingredient| %>
+        <li style="display: flex; flex-drirection: row; align-items: center">
+          <%= ingredient %>
+          <% @fridge.each do |f|%>
+            <%if ingredient.include? f.content%>
+              <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
+            <%end%>
+          <%end%>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+
+
+  <% @ingredientsOfRecipes.each do |item| %>
+      <ul>
+        <%= item["name"] %>
+        
+        <% item['ingredients'].each do |ingredient, r| %>
+        <%@fridge.each do |f|%>
+          <li style="display: flex; flex-drirection: row; align-items: center">
+            <% if ingredient.include? f.content%>
+              <p>
+                Tu possède : <%= ingredient %>
+              </p>
+              
+            <% else %>
+              <p>
+                il te manque : <%= ingredient %>
+              </p>
+            <%end%>
+            
+            
+
+          </li>
+          <%end%>
+        <% end %>
+        
+      </ul>
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+    <ul>
+        <%= item["name"] %>
+        <br/>
+        Note : <%= item["rate"]%>
+        
+        <% item['ingredients'].each_with_index do |ingredient, index| %>
+          <li style="display: flex; flex-drirection: row; align-items: center">
+
+            <%= "#{index}" %>
+            -
+            <%= ingredient %>
+
+          </li>
+        <%end%>
+        
+      </ul>
+
+
+
+
+      <% @ingredientsOfRecipes.each do |item| %>
+      <ul>
+        <%= item['name']%>
+        <% item['ingredients'].each do |ingredient| %>
+          <% @food.each do |f|%>
+            <% if ingredient.include? f%>
+              <li>
+                <%= ingredient %>
+                <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
+              </li>
+              <% break %>
+          <% end %>
+          
+        <% end %>
+        <%end%>
+  
+        <% item['ingredients'].each do |ingredient| %>
+          <% @food.each do |f|%>
+            <% if ingredient.exclude? f%>
+              <li>
+                <%= ingredient %>
+                <i class="fa-solid fa-xmark" style="color: red; margin-left: 10px"></i>
+              </li>
+              <% break %>
+          <% end %>
+        <% end %>
+        <%end%>
+  
+      </ul>
+      <% end %>
+
+
+
+
+
+
+      <% @ingredientsOfRecipes.each do |item| %>
+    <%@count = 0%>
+      <ul>
+        <%= item['name']%>
+        
+        <% item['ingredients'].each do |ingredient| %>
+          <% @food.each do |f|%>
+            <% if ingredient.include? f%>
+              <%@count += 1%>
+              <li>
+                <%= ingredient %>
+                <%= @check %>
+              </li>
+            
+              <% break unless ingredient != f %>
+          <% end %>
+          
+          
+        <% end %>
+        
+        <%end%>
+        <% item['ingredients'].each do |ingredient| %>
+          
+          <li>
+            <%= ingredient %>
+          </li>
+        <%end%>
+  
+      </ul>
+      <%=@count.to_s + " / " + item['ingredients'].size.to_s + " ingrédients"%>
+      <% end %>
+
+
+
+
+      <table>
+  <% @fridge.each do |item| %>
+    <tr>
+      <td><%= link_to item.content, fridge_path(item) %></td>
+      <td><%= button_to 'Edit', edit_fridge_path(item), method: 'get'%></td>
+      <td><%= button_to 'Remove', fridge_path(item), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+</table>
+
+<%= link_to "Add a New Item", new_fridge_path %>
+
+
+
+
+
+
+  
+<% @ingredientsOfRecipes.each do |item| %>
+<%@count = 0%>
+  <ul>
+    <%= item['name']%>
+    <% item['ingredients'].each do |ingredient| %>
+      <%@test = ''%>
+      <% for a in 0..(@foods.size-1) do%>
+          <%if ingredient.include? @foods[a] %>
+            <li>
+              <%= ingredient%>
+              <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
+              <% @test = 'OK'%>
+              <% @count += 1 %>
+            </li>
+            <% a == @foods.size %>
+            
+          <% end %>
+          <%# FOR CAPITALIZE %>
+          <%if ingredient.include? @foods[a].capitalize %>
+            <li>
+              <%= ingredient%>
+              <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
+              <% @test = 'OK'%>
+              <% @count += 1 %>
+            </li>
+            <% a == @foods.size %>
+            
+          <% end %>
+          
+      <%end%>
+      
+      <%if @test != 'OK'%>
+      <li>
+        <%= ingredient%>
+        </li>
+      <%end%>
+
+
+    <%end%>
+  </ul>
+  <%= @count.to_s + " / " + item['ingredients'].size.to_s + " ingrédients"%>
+  <% end %>
+
+
+  <%= form_with model: @fridge do |form| %>
+  <%= form.text_field :content, placeholder: "content" %>
+
+  <%= form.submit %>
+<% end %>
