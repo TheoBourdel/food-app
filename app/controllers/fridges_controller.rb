@@ -45,14 +45,20 @@ class FridgesController < ApplicationController
     end
     
     def new
+
         @fridge = Fridge.new
         
     end
     
     def create
-        fridge = Fridge.create(fridge_params)
-    
-        redirect_to action: "index"
+        
+        @fridge = Fridge.create(fridge_params)
+        
+        if @fridge.save
+            redirect_to action: "index", :notice => "Your food was added" 
+        else
+            render "new"
+        end
     end
     
     def edit
@@ -61,10 +67,13 @@ class FridgesController < ApplicationController
     
     def update
         @fridge = Fridge.find(params[:id])
-    
-        @fridge.update(fridge_params)
         
-        redirect_to action: "index"
+        if @fridge.update(fridge_params)
+        # @fridge.update(fridge_params)
+            redirect_to action: "index"
+        else
+            render "edit"
+        end
     end
     
     def destroy

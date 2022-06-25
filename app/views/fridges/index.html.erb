@@ -78,30 +78,30 @@
             </div>
             <ul>
             <% item['ingredients'].each do |ingredient| %>
-            <%@test = ''%>
-            <% for a in 0..(@foods.size-1) do%>
-              <%if ingredient.include? @foods[a] %>
+            <%@result = ''%>
+            <% for food in 0..(@foods.size-1) do%>
+              <%if ingredient.include? @foods[food] %>
                 <li>
-                  <%= ingredient%>
+                  <%= ingredient %>
                   <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
-                  <% @test = 'OK'%>
+                  <% @result = 'OK'%>
                   <% @count += 1 %>
                 </li>
-                <% a == @foods.size %>   
+                <% food == @foods.size %>   
               <% end %>
               <%# FOR CAPITALIZE %>
-              <%if ingredient.include? @foods[a].capitalize %>
+              <%if ingredient.include? @foods[food].capitalize %>
                 <li>
                   <%= ingredient%>
                   <i class="fa-solid fa-check" style="color: green; margin-left: 10px"></i>
-                  <% @test = 'OK'%>
+                  <% @result = 'OK'%>
                   <% @count += 1 %>
                 </li>
-                <% a == @foods.size %>
+                <% food == @foods.size %>
               <% end %>
             <%end%>
             
-            <%if @test != 'OK'%>
+            <%if @result != 'OK'%>
               <li>
                 <%= ingredient%>
               </li>

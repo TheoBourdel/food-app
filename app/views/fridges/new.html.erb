@@ -20,14 +20,26 @@
   <body>
     <section class="add-food">
       <h1>Add your food</h1>
-      <div class="input">
+      <div class="form-container">
         
 
-        <%= form_with class: 'form', model: @fridge do |form| %>
-          <%= form.text_field :content,class: 'text', placeholder: "food..." %>
-          <%= form.submit %>
+        <%= form_with model: @fridge do |form| %>
+          <div class="input">
+            <%= form.text_field :content, placeholder: "food..." %>
+            <%= form.submit 'Add', :id => "submit" %>
+          </div>
+          <% if @fridge.errors.any? %>
+            <div class="errors">
+              <ul>
+                <% @fridge.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         <% end %>
-
       </div>
     </section>
   </body>
