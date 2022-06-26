@@ -52,7 +52,9 @@
 
       <div class="right-content">
 
-        <% @ingredientsOfRecipes.each do |item| %>
+        <% @ingredientsOfRecipes.each do |item|%>
+          
+          
           <%@count = 0%>
           <div class="recipe-container">
             <h2>
@@ -110,7 +112,10 @@
           </ul>
           <div class='content'>
             <%= @count.to_s + " / " + item['ingredients'].size.to_s + " ingrédients"%>
+            
           </div>
+          <%= @test = (@count.to_f / item['ingredients'].size.to_f)*100%>
+          
         </div>
       <% end %> 
       

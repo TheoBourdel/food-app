@@ -25,7 +25,7 @@
 
         <%= form_with model: @fridge do |form| %>
           <div class="input">
-            <%= form.text_field :content, placeholder: "food..." %>
+            <%= form.text_field :content, placeholder: "content" %>
             <%= form.submit 'Add', :id => "submit" %>
           </div>
           <% if @fridge.errors.any? %>

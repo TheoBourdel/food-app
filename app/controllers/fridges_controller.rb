@@ -20,12 +20,12 @@ class FridgesController < ApplicationController
 
         @count = 0
 
-
         # AJOUTE LES RECETTES EN FONCTION DES INGREDIENTS DANS LE FRIGO
         @ingredientsOfRecipes = []
 
         @fridge.each do |f|
             @recipes.each do |item|
+                
                 item['ingredients'].each do |i|
                     if i.include? f.content
                         @ingredientsOfRecipes.push(item)
