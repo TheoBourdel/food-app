@@ -367,6 +367,9 @@ img {
         width: 100vw;
         align-items: center;
     }
+    .recipes-filter .left-content .fridge .rectangle {
+        height: 350px!;
+    }
     .main-container {
         display: flex;
         justify-content: center;
